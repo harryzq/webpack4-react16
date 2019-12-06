@@ -7,6 +7,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const commonConfig = require("./webpack.common.config.js");
 const merge = require("webpack-merge");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 const publicConfig = {
   mode: "production",
@@ -27,6 +28,15 @@ const publicConfig = {
   // },
   plugins: [
     new CleanWebpackPlugin(),
+    new CompressionWebpackPlugin({ //gzip 压缩
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp(
+          '\\.(js|css)$'    //压缩 js 与 css
+      ),
+      threshold: 10240,
+      minRatio: 0.8
+  })
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: "vendor"
     // }),

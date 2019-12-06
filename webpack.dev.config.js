@@ -97,7 +97,9 @@ const devConfig = {
     contentBase: path.join(__dirname, "./dist"),
     historyApiFallback: true,
     host: "127.0.0.1",
-    clientLogLevel: "error"
+    clientLogLevel: "error",
+    overlay: true,
+    compress: true
     // quiet: true
   },
   // resolve: {
