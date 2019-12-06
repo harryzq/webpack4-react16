@@ -4,7 +4,7 @@ var webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== 'production'
-
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const commonConfig = {
   /*入口*/
   entry: {
@@ -130,7 +130,22 @@ const commonConfig = {
       filename: "index.html",
       template: path.join(__dirname, "src/index.html"),
       inject: 'body'
-    })
+    }),
+     // 复制src/static
+     new CopyWebpackPlugin([
+      {
+          from: "src/static",
+          to: "static"
+      },
+      // new AddAssetHtmlPlugin({
+      //   filepath: require.resolve(path.resolve(__dirname, './src/static/dll/vendor_library.js')), // 这个路径是你的dll文件路径 
+      //   includeSourcemap: false ,// 这里是因为我开启了sourcemap。 不这么写会报错。
+      //   // 文件输出目录
+      //   outputPath: 'vendor_library',
+      //   // 脚本或链接标记的公共路径
+      //   publicPath: 'vendor_library'
+      // })
+  ])
   ],
   resolve: {
     alias: {
@@ -139,7 +154,7 @@ const commonConfig = {
       router: path.join(__dirname, "src/router"),
       actions: path.join(__dirname, "src/redux/actions"),
       reducers: path.join(__dirname, "src/redux/reducers"),
-      'react-dom': '@hot-loader/react-dom',
+      // 'react-dom': '@hot-loader/react-dom',
       // redux: path.join(__dirname, 'src/redux')
     }
   }

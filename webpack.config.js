@@ -74,9 +74,11 @@ const publicConfig = {
         uglifyOptions: {
           compress: {
             unused: true,
+            drop_console:true,
             drop_debugger: true
           },
           output: {
+            beautify:false,
             comments: false
           }
         }
