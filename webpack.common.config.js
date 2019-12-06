@@ -9,7 +9,7 @@ const commonConfig = {
   /*入口*/
   entry: {
     app: ["babel-polyfill", path.join(__dirname, "src/index.js")],
-    vendor: ["react", "react-router-dom", "redux", "react-dom", "react-redux"]
+    // vendor: ["react", "react-router-dom", "redux", "react-dom", "react-redux",'redux-thunk','axios',"@babel/runtime","@loadable/component"]
   },
   /*输出到dist文件夹，输出文件名字为bundle.js*/
   output: {
@@ -87,6 +87,26 @@ const commonConfig = {
       }
     ]
   },
+
+  // optimization: {
+  //   runtimeChunk: "single",
+  //   splitChunks: {
+  //     chunks: 'all',   // initial、async和all
+  //     minSize: 30000,   // 形成一个新代码块最小的体积
+  //     maxAsyncRequests: 5,   // 按需加载时候最大的并行请求数
+  //     maxInitialRequests: 3,   // 最大初始化请求数
+  //     automaticNameDelimiter: '~',   // 打包分割符
+  //     name: true,
+  //     cacheGroups: {
+  //       vendors: { // 打包两个页面的公共代码
+  //         minChunks: 1, // 引入两次及以上被打包
+  //         name: 'vendors', // 分离包的名字
+  //         chunks: 'all'
+  //       },
+  //     }
+  //   },
+
+  // },
   optimization: {
     runtimeChunk: "single",
     splitChunks: {
@@ -95,7 +115,7 @@ const commonConfig = {
           test: /[\\/]node_modules[\\/]/,
           name: "vendor",
           chunks: "initial",
-          minChunks: 2
+          minChunks: 1
         }
       }
     },
