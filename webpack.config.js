@@ -8,6 +8,7 @@ const commonConfig = require("./webpack.common.config.js");
 const merge = require("webpack-merge");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const publicConfig = {
   mode: "production",
@@ -36,6 +37,11 @@ const publicConfig = {
       ),
       threshold: 10240,
       minRatio: 0.8
+  }),
+  new BundleAnalyzerPlugin({
+    analyzerHost:'localhost',
+    analyzerPort:9000,
+    defaultSizes:"gzip",
   })
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: "vendor"

@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== 'production'
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+
 const commonConfig = {
   /*入口*/
   entry: {
@@ -145,7 +146,8 @@ const commonConfig = {
       //   // 脚本或链接标记的公共路径
       //   publicPath: 'vendor_library'
       // })
-  ])
+  ]),
+  
   ],
   resolve: {
     alias: {
@@ -154,7 +156,7 @@ const commonConfig = {
       router: path.join(__dirname, "src/router"),
       actions: path.join(__dirname, "src/redux/actions"),
       reducers: path.join(__dirname, "src/redux/reducers"),
-      // 'react-dom': '@hot-loader/react-dom',
+      'react-dom': '@hot-loader/react-dom',
       // redux: path.join(__dirname, 'src/redux')
     }
   }
