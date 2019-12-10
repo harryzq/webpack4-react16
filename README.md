@@ -33,3 +33,8 @@ npm run test-build
 ```
 npm run build
 ```
+
+TBD:
+1. axios集成还未完善
+2. redux-thunk redux-saga
+3. redux-logger
