@@ -4,7 +4,7 @@ webpack4 react16 react-router redux redux-thunk sass/scss
 ### 一个基础的react项目结构
 
 项目集成：
-1. React,React-dom,react-router-dom,Redux,redux-thunk
+1. React,React-dom,react-router-dom,Redux,redux-thunk,axios
 2. webpack + gzip压缩
 3. 默认压缩css js
 4. loadable按需加载组件
