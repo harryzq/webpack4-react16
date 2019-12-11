@@ -12,6 +12,7 @@ webpack4 react16 react-router redux redux-thunk sass/scss
 6. sass/css
 7. 默认采用google ESlint
 8. webpack-bundle-analyzer 可视化分析，端口9000
+9. 可以使用redux-devtools
 
 #### Installation
 ```
@@ -33,8 +34,3 @@ npm run test-build
 ```
 npm run build
 ```
-
-TBD:
-1. axios集成还未完善
-2. redux-thunk redux-saga
-3. redux-logger

@@ -2,7 +2,7 @@ import utils from '@/utils/common'
 import api from '@/utils/api.js'
 import request from '@/utils/request'
 import Vue from "vue";
-import storage from '../utils/storage'
+import storage from './storage'
 const pkg = require('../../package.json')
 const pjName =  pkg.name
 // import vm from '../main.js'
