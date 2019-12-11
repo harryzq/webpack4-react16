@@ -4,6 +4,8 @@ import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 import configureStore from './redux/store';
 import getRouter from 'router/router';
+
+import './assets/css/global.scss'
  const store = configureStore()
 /*初始化*/
 renderWithHotReload(getRouter());

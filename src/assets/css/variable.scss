@@ -1,0 +1,57 @@
+
+// @import url('https://fonts.googleapis.com/css?family=Squada+One&display=swap');
+
+// @import url('https://fonts.googleapis.com/css?family=Teko&display=swap');
+
+// @import url('https://fonts.googleapis.com/css?family=Barlow+Condensed&display=swap');
+
+//中文字体
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
+
+// 越南字体
+@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
+
+$ui-width: 1283px;
+$ui-height: 737px;
+
+@function px2vw($px){
+  @return $px / $ui-width * 100vw;
+}
+@function px2vh($px){
+  @return $px / $ui-height * 100vh;
+}
+
+// 16:9~4:3
+// $ui-height-widescreen: 900px;
+// // 4:3
+// $ui-height-add: 1080px;
+// $ui-height-add: 960px;
+
+@function px2vw4wide($px) {
+  @return $px / $ui-width * 100vw;
+}
+
+@function px2res($px) {
+  @return $px / $ui-width * 100vw;
+}
+
+
+// @function px2vh4wideadd($px) {
+//   @return $px / $ui-height-add * 100vh;
+// }
+
+// 设置统一字体 start
+$base-font-family:'Teko-Regular';
+
+$font-family: 'Teko-Regular', $base-font-family;
+
+$font-family: 'Teko-Regular',sans-serif;
+
+// 设置统一字体 end
+
+$zh-font-family: 'Noto Sans TC', sans-serif;
+
+$vn-font-family: 'Yanone Kaffeesatz', sans-serif;
+

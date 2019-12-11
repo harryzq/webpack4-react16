@@ -99,6 +99,7 @@ const devConfig = {
     host: "127.0.0.1",
     clientLogLevel: "error",
     overlay: true,
+    disableHostCheck: true,
     compress: true
     // quiet: true
   },

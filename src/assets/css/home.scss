@@ -1,0 +1,116 @@
+body{
+	width: 100vw;
+  overflow-x: hidden !important;
+  // height: 100vh;
+  // overflow: hidden;
+}
+
+#app {
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+  width: 100vw;
+  background: #070e24;
+  min-height: 100vh;
+  // transform:scale(1);
+  overflow-x: hidden
+}
+
+.none{
+	display: none;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+.main-body {
+  width: 100vw;
+  height: 100vh;
+}
+
+// 特殊处理
+
+#app[data-lang=zh-tw]{
+  font-family: $zh-font-family !important;
+  .region ul p,
+  .cover-warp .left,
+  .cover-warp .content,
+  .cover-warp .right .spin-warp,
+  .cover-warp .content .skip,
+  .cover-warp .history .history-item-warp, 
+  .cover-warp .rights,
+  .dialog .warp .content
+   {
+    font-family: $zh-font-family !important;
+  }
+}
+// 越南语
+#app[data-lang=vi],#app[data-lang=vn]{
+  font-family: $vn-font-family !important;
+  .region ul p,
+  .cover-warp .left,
+  .cover-warp .content,
+  .cover-warp .right .spin-warp,
+  .cover-warp .content .skip,
+  .cover-warp .history .history-item-warp, 
+  .cover-warp .rights,
+  .dialog .warp .content
+   {
+    font-family: $vn-font-family !important;
+  }
+}
+// 繁体字
+#app[data-lang=zh]{
+  font-family: $zh-font-family !important;
+  .region ul p,
+  .cover-warp .left,
+  .cover-warp .content,
+  .cover-warp .right .spin-warp,
+  .cover-warp .content .skip,
+  .cover-warp .history .history-item-warp, 
+  .cover-warp .rights,
+  .dialog .warp .content
+   {
+    font-family: $zh-font-family !important;
+  }
+}
+// 繁体字
+#app[data-lang=ru]{
+  font-family: $vn-font-family !important;
+  .region ul p,
+  .cover-warp .left,
+  .cover-warp .content,
+  .cover-warp .right .spin-warp,
+  .cover-warp .content .skip,
+  .cover-warp .history .history-item-warp, 
+  .cover-warp .rights,
+  .dialog .warp .content
+   {
+    font-family: $vn-font-family !important;
+  }
+}
+
+.loading-mask{
+	z-index: 100;
+}
+.rule-mask{
+	z-index: 15;
+	// height: px2vh(644px);
+	height: 100%;
+	top: auto;
+	bottom: 0;
+}
+.loading-mask{
+	z-index: 100;
+}
+.mask{
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	position: fixed;
+	background-color: #000;
+	opacity: 0.8;
+	z-index: 100;
+}

@@ -1,0 +1,227 @@
+@keyframes rotateA {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(0deg);
+  }
+
+  70% {
+    transform: rotate(-90deg);
+  }
+
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .wp_pop {
+    display: block;
+  }
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 0.6vw;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #696969;
+  border-radius: 1vw;
+  border: 0px solid #ffffff;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 1vw;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.animated {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+}
+
+.fadeOutDown {
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    /*-webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);*/
+    -webkit-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    /*-webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);*/
+    -webkit-transform: translate3d(-50%, 50px, 0);
+    transform: translate3d(-50%, 50px, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@-webkit-keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@-webkit-keyframes marquee-animation {
+  0% {
+    margin-left: 100%;
+    transform: translateX(0%);
+  }
+  100% {
+    margin-left: 0;
+    transform: translateX(-100%);
+  }
+}
+@-moz-keyframes marquee-animation {
+  0% {
+    margin-left: 100%;
+    transform: translateX(0%);
+  }
+  100% {
+    margin-left: 0;
+    transform: translateX(-100%);
+  }
+}
+@keyframes marquee-animation {
+  0% {
+    margin-left: 100%;
+    transform: translateX(0%);
+  }
+  100% {
+    margin-left: 0;
+    transform: translateX(-100%);
+  }
+}
+// /**
+// 父元素
+// display: inline-block;
+// overflow: hidden;
+// white-space: nowrap;
+// 增加span 添加 marquee
+// **/
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee-animation 8s linear infinite;
+  -moz-animation: marque-animation 8s linear infinite;
+  -webkit-animation: marquee-animation 8s linear infinite;
+  -o-animation: marquee-animation 8s linear infinite;
+}
+// .marque{
+//   overflow:hidden;
+//   white-space: nowrap;
+//   animation:marque-animation 8s linear infinite;
+//   -moz-animation:marque-animation 8s linear infinite;
+//   -webkit-animation:marque-animation 8s linear infinite;
+//   -o-animation:marque-animation 8s linear infinite;
+// }
+// 路由过渡动画 上下
+.slide-bottom-enter-active,
+.slide-bottom-leave-active,
+.slide-top-enter-active,
+.slide-top-leave-active {
+  will-change: transform;
+  transition: all 400ms;
+  position: absolute;
+}
+.slide-bottom-enter {
+  opacity: 0;
+  transform: translate3d(0, -100%, 0);
+}
+.slide-bottom-leave-active {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+}
+.slide-top-enter {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+}
+.slide-top-leave-active {
+  opacity: 0;
+  transform: translate3d(0, -100%, 0);
+}
+
+// 路由过渡动画 左右
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  will-change: transform;
+  transition: all 300ms;
+  position: absolute;
+}
+.slide-right-enter {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.slide-left-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.slide-left-leave-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}

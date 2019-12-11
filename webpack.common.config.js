@@ -72,10 +72,19 @@ const commonConfig = {
           'css-loader',
           'postcss-loader',
           'sass-loader',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+                resources: [
+                    // resolve方法第二个参数为scss配置文件地址，如果有多个，就进行依次添加即可
+                    path.resolve(__dirname, 'src/assets/css/global.scss')
+                ]
+            }
+          }
         ],
       },
       {
-        test: /\.(jpg|png|gif|bmp|jpeg)$/,
+        test: /\.(jpg|png|gif|bmp|jpeg|svg)$/,
         use: [
           {
             loader: "url-loader",

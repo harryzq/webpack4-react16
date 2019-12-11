@@ -1,4 +1,5 @@
 import http from '../../utils/http'
+import Loading from '../../component/Loading'
 export default  store => next => action => {
     const {dispatch, getState} = store;
     /*如果dispatch来的是一个function，此处不做处理，直接进入下一级*/
@@ -18,7 +19,7 @@ export default  store => next => action => {
     if (!action.promise) {
         return next(action);
     }
-
+    Loading.open();
     /*解析types*/
     const [REQUEST,
         SUCCESS,
@@ -31,6 +32,7 @@ export default  store => next => action => {
     });
     /*定义请求成功时的方法*/
     const onFulfilled = result => {
+        Loading.close();
         next({
             ...rest,
             result,
@@ -39,17 +41,22 @@ export default  store => next => action => {
         if (afterSuccess) {
             afterSuccess(dispatch, getState, result);
         }
+        // console.log('success')
     };
     /*定义请求失败时的方法*/
     const onRejected = error => {
+        Loading.close();
+        console.error(error)
         next({
             ...rest,
             error,
             type: FAILURE
         });
+        // Loading.close();
     };
     return promise(http).then(onFulfilled, onRejected).catch(error => {
         console.error('HTTP MIDDLEWARE ERROR:', error);
+        Loading.close();
         onRejected(error)
     })
 }

@@ -1,7 +1,9 @@
 import axios from 'axios'    
 import {getCookie} from './index'
-let loadingInstance = null     // 加载全局的loading
-
+const CancelToken = axios.CancelToken 
+let sources = {}
+// 请求列表
+const requestList = []
 const instance = axios.create({    //创建axios实例，在这里可以设置请求的默认配置
   timeout: 10000,
   baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://119.28.12.109:3100/mock/56/api',   //根据自己配置的反向代理去设置不同环境的baeUrl
@@ -27,6 +29,19 @@ let httpCode = {        //这里我简单列出一些常见的http状态码信�
 
 /** 添加请求拦截器 **/
 instance.interceptors.request.use(config => {
+  //将请求地址及参数作为一个完整的请求
+  const request = JSON.stringify(config.url) + JSON.stringify(config.data)
+  config.cancelToken = new CancelToken((cancel) => {
+    sources[request] = cancel
+  })
+  //1.判断请求是否已存在请求列表，避免重复请求，将当前请求添加进请求列表数组；
+  if(requestList.includes(request)){
+    sources[request]('取消重复请求')
+  }else{
+    requestList.push(request)
+    //2.请求开始，改变loading状态供加载动画使用
+    // store.dispatch('changeGlobalState', {loading: true})
+  }
   return config
 }, error=> {
   // 对请求错误做些什么
