@@ -5,7 +5,6 @@ import {Provider} from 'react-redux';
 import configureStore from './redux/store';
 import getRouter from 'router/router';
  const store = configureStore()
- 
 /*初始化*/
 renderWithHotReload(getRouter());
 

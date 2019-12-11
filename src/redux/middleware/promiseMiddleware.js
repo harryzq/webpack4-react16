@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import http from '../../utils/http'
 export default  store => next => action => {
     const {dispatch, getState} = store;
     /*如果dispatch来的是一个function，此处不做处理，直接进入下一级*/
@@ -49,9 +48,8 @@ export default  store => next => action => {
             type: FAILURE
         });
     };
-
-    return promise(axios).then(onFulfilled, onRejected).catch(error => {
-        console.error('MIDDLEWARE ERROR:', error);
+    return promise(http).then(onFulfilled, onRejected).catch(error => {
+        console.error('HTTP MIDDLEWARE ERROR:', error);
         onRejected(error)
     })
 }

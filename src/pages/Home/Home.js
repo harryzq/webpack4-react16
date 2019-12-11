@@ -1,26 +1,20 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {get_init_info} from '../../redux/actions/home'
 import './Home.scss'
-export default class Home extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            count: 0
-        }
     }
-
-    _handleClick() {
-        this.setState({
-            count: ++this.state.count
-        });
+    _handleClick(){
+        this.props.get_init_info()
     }
-
     render() {
         return (
             <div className="home">
-                this is home<br/>
-                当前计数：{this.state.count}<br/>
-                <button onClick={() => this._handleClick()}>自增</button>
+                <button onClick={() => this._handleClick()}>get_init_info</button>
             </div>
         )
     }
 }
+export default connect((state) => ({init_info: state.init_info}), {get_init_info})(Home);
