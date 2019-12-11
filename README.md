@@ -13,6 +13,7 @@ webpack4 react16 react-router redux redux-thunk sass/scss
 7. 默认采用google ESlint
 8. webpack-bundle-analyzer 可视化分析，端口9000
 9. 可以使用redux-devtools
+10. 集成global saas,全局使用mixins
 
 #### Installation
 ```
