@@ -6,7 +6,7 @@ let sources = {}
 const requestList = []
 const instance = axios.create({    //创建axios实例，在这里可以设置请求的默认配置
   timeout: 10000,
-  baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://119.28.12.109:3100/mock/56/api',   //根据自己配置的反向代理去设置不同环境的baeUrl
+  // baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://119.28.12.109:3100/mock/56/api',   //根据自己配置的反向代理去设置不同环境的baeUrl
 //   headers: {
 //     token: sessionStorage.getItem('token') || ''
 //   }
