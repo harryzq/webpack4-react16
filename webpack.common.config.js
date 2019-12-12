@@ -33,7 +33,8 @@ const commonConfig = {
             }
           }
         ],
-        include: path.join(__dirname, "src")
+        include: path.join(__dirname, "src"),
+        exclude: path.resolve(__dirname,' ./node_modules')
       },
       
       //   {
@@ -69,8 +70,16 @@ const commonConfig = {
             // },
           },
           // 'style-loader',
-          'css-loader',
-          'postcss-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 3,
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: { ident: 'postcss' }
+          },
           'sass-loader',
           {
             loader: 'sass-resources-loader',
@@ -82,6 +91,7 @@ const commonConfig = {
             }
           }
         ],
+        exclude: path.resolve(__dirname,' ./node_modules')
       },
       {
         test: /\.(jpg|png|gif|bmp|jpeg|svg)$/,
@@ -93,7 +103,8 @@ const commonConfig = {
               name:'images/[name]-[hash:8].[ext]'
             }
           }
-        ]
+        ],
+        exclude: path.resolve(__dirname,' ./node_modules')
       }
     ]
   },
@@ -159,6 +170,7 @@ const commonConfig = {
   
   ],
   resolve: {
+    // modules: [path.resolve(__dirname, 'node_modules')],
     alias: {
       pages: path.join(__dirname, "src/pages"),
       component: path.join(__dirname, "src/component"),

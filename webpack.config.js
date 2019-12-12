@@ -32,16 +32,14 @@ const publicConfig = {
     new CompressionWebpackPlugin({ //gzip 压缩
       filename: '[path].gz[query]',
       algorithm: 'gzip',
-      test: new RegExp(
-          '\\.(js|css)$'    //压缩 js 与 css
-      ),
+      test: /\.js$|\.css$/,
       threshold: 10240,
       minRatio: 0.8
   }),
   new BundleAnalyzerPlugin({
     analyzerHost:'localhost',
     analyzerPort:9000,
-    defaultSizes:"gzip",
+    // defaultSizes:"gzip",
   })
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: "vendor"
