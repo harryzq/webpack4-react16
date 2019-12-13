@@ -14,7 +14,7 @@ webpack4 react16 react-router redux redux-thunk sass/scss
 8. webpack-bundle-analyzer 可视化分析，端口9000
 9. 可以使用redux-devtools
 10. 集成global saas,全局使用mixins
-11. 开发环境集成mcokjs
+11. 开发环境集成mockjs
 
 #### Installation
 ```
