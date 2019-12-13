@@ -6,15 +6,12 @@ import configureStore from './redux/store';
 import getRouter from 'router/router';
 import './assets/css/global.scss'
 
-const DEV_ENV = process.env.NODE_ENV==='development'
 const store = configureStore()
 /*初始化*/
 renderWithHotReload(getRouter());
-if(DEV_ENV){
-    
+if (MOCK) {
+    require('api/mock/index');
 }
-
-require('../mock/index')
 /*热更新*/
 if (module.hot) {
     module.hot.accept('./router/router', () => {

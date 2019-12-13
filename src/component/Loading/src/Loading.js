@@ -43,7 +43,7 @@ import "./Loading.scss";
 export default class Loading extends Component {
   render() {
     let { tip } = this.props;
-    console.log(tip);
+    // console.log(tip);
     return (
       <div className="ga-loading">
         <div className="mask rule-mask loading-mask"></div>

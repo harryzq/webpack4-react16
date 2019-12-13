@@ -23,6 +23,9 @@ const devConfig = {
     // chunkFilename:'[name].js'
   },
   plugins: [
+    new webpack.DefinePlugin({
+          MOCK: true
+    })
     // new webpack.hotModuleReplacementPlugin(),
     // new CleanWebpackPlugin(),
     // new webpack.optimize.CommonsChunkPlugin({

@@ -177,6 +177,7 @@ const commonConfig = {
       router: path.join(__dirname, "src/router"),
       actions: path.join(__dirname, "src/redux/actions"),
       reducers: path.join(__dirname, "src/redux/reducers"),
+      api: path.join(__dirname, 'src/api'),
       'react-dom': '@hot-loader/react-dom',
       // redux: path.join(__dirname, 'src/redux')
     }

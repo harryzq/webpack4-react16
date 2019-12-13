@@ -6,9 +6,10 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const commonConfig = require("./webpack.common.config.js");
 const merge = require("webpack-merge");
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 const publicConfig = {
   mode: "production",
@@ -28,19 +29,23 @@ const publicConfig = {
   //   // chunkFilename:'[name].js'
   // },
   plugins: [
+    new webpack.DefinePlugin({
+      MOCK: false
+    }),
     new CleanWebpackPlugin(),
-    new CompressionWebpackPlugin({ //gzip 压缩
-      filename: '[path].gz[query]',
-      algorithm: 'gzip',
+    new CompressionWebpackPlugin({
+      //gzip 压缩
+      filename: "[path].gz[query]",
+      algorithm: "gzip",
       test: /\.js$|\.css$/,
       threshold: 10240,
       minRatio: 0.8
-  }),
-  new BundleAnalyzerPlugin({
-    analyzerHost:'localhost',
-    analyzerPort:9000,
-    // defaultSizes:"gzip",
-  })
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerHost: "localhost",
+      analyzerPort: 9000
+      // defaultSizes:"gzip",
+    })
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: "vendor"
     // }),
@@ -78,11 +83,11 @@ const publicConfig = {
         uglifyOptions: {
           compress: {
             unused: true,
-            drop_console:true,
+            drop_console: true,
             drop_debugger: true
           },
           output: {
-            beautify:false,
+            beautify: false,
             comments: false
           }
         }
