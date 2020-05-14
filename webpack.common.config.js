@@ -192,3 +192,66 @@ const commonConfig = {
   }
 };
 module.exports = commonConfig;
+
+
+参考下面：
+const merge = require("webpack-merge");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+const COMMON_CONFIG = require("./webpack.common.config")
+const PROD_CONFIG = {
+    mode: "production",
+    devtool: "",
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true, // 开启并行压缩
+                // sourceMap: true,
+                extractComments: true, // 移除注释
+                uglifyOptions: {
+                    compress: {
+                        unused: true,
+                        drop_console: true,
+                        drop_debugger: true
+                    },
+                    output: {
+                        beautify: false,
+                        comments: false
+                    }
+                }
+            }),
+            // 用于优化css文件
+            new OptimizeCssAssetsPlugin({
+                assetNameRegExp: /\.css$/g,
+                cssProcessorOptions: {
+                    safe: true,
+                    autoprefixer: { disable: true }, 
+                    mergeLonghand: false,
+                    discardComments: {
+                        removeAll: true // 移除注释
+                    }
+                },
+                canPrint: true
+            })
+        ]
+    },
+    plugins: [
+        // new BundleAnalyzerPlugin({
+        //     analyzerHost: 'localhost',
+        //     analyzerPort: 9000
+        // })
+    ]
+}
+
+module.exports = merge({
+    customizeArray(a, b, key) {
+        /*entry.app不合并，全替换*/
+        if (key === "entry.app") {
+            return b;
+        }
+        return undefined;
+    }
+})(PROD_CONFIG, COMMON_CONFIG)
