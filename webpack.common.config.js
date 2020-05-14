@@ -108,6 +108,36 @@ const commonConfig = {
   //   },
 
   // },
+      optimization: {
+        runtimeChunk: "single",
+        splitChunks: {
+            chunks: "initial",
+            cacheGroups: {
+                vendor: // 项目基本框架等
+                { 
+                    test: /(react|react-dom|react-dom-router|babel-polyfill|mobx)/,
+                    name: "vendor",
+                    chunks: "all",
+                    priority: 100,
+                    minChunks: 2,
+                },
+                antd:
+                {
+                    test: /(antd|@ant-design)/,
+                    name: "antd",
+                    chunks: "all",
+                    priority: 90,
+                    minChunks: 1,
+                },
+                common: { // 其他
+                    chunks: 'all',
+                    minChunks: 2,
+                    name: 'common',
+                    priority: 80,
+                },
+            }
+        },
+    },
   optimization: {
     runtimeChunk: "single",
     splitChunks: {
