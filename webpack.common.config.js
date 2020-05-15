@@ -306,6 +306,12 @@ module.exports = {
                     priority: 70,
                     enforce: true,
                     reuseExistingChunk: true
+                },
+                common:{
+                    chunks:'all',
+                    minChunks:2,
+                    name:'common',
+                    priority:60
                 }
             }
         },
