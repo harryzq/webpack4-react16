@@ -195,63 +195,119 @@ module.exports = commonConfig;
 
 
 参考下面：
-const merge = require("webpack-merge");
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const path = require('path');
+const fs = require('fs');
+const pathName = './public/pages';
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+getEntry = () => {
+    let entry = {};
+    const files = fs.readdirSync(pathName);
+    console.log(files)
+    files.forEach(file => {
+        let fileName = file.split('.');
+        if (fileName[1] == "js" || fileName[1] == "ts") {
+            entry[fileName[0]] = `${pathName}/${file}`;
+        }
+    });
+    return entry;
+};
 
-const COMMON_CONFIG = require("./webpack.common.config")
-const PROD_CONFIG = {
-    mode: "production",
-    devtool: "",
-    optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true, // 开启并行压缩
-                // sourceMap: true,
-                extractComments: true, // 移除注释
-                uglifyOptions: {
-                    compress: {
-                        unused: true,
-                        drop_console: true,
-                        drop_debugger: true
-                    },
-                    output: {
-                        beautify: false,
-                        comments: false
+module.exports = {
+    entry: getEntry(),
+    output: {
+        path: path.resolve(__dirname, '../public/bin/'),
+        filename: "[name].js"
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js?$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react"
+                        ],
+                        plugins: [
+                            "@babel/plugin-proposal-class-properties"
+                        ]
                     }
                 }
-            }),
-            // 用于优化css文件
-            new OptimizeCssAssetsPlugin({
-                assetNameRegExp: /\.css$/g,
-                cssProcessorOptions: {
-                    safe: true,
-                    autoprefixer: { disable: true }, 
-                    mergeLonghand: false,
-                    discardComments: {
-                        removeAll: true // 移除注释
+            },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.(jpg|png|gif|bmp|jpeg)$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 8192,
+                            name: 'images/[name].[ext]'
+                        }
                     }
-                },
-                canPrint: true
-            })
+                ]
+            }
         ]
     },
     plugins: [
-        // new BundleAnalyzerPlugin({
-        //     analyzerHost: 'localhost',
-        //     analyzerPort: 9000
-        // })
-    ]
-}
-
-module.exports = merge({
-    customizeArray(a, b, key) {
-        /*entry.app不合并，全替换*/
-        if (key === "entry.app") {
-            return b;
-        }
-        return undefined;
-    }
-})(PROD_CONFIG, COMMON_CONFIG)
+        new CleanWebpackPlugin(),
+    ],
+    optimization: {
+        runtimeChunk: "single",
+        splitChunks: {
+            cacheGroups: {
+                default: false,
+                reactBase: {
+                    name: 'reactBase',
+                    test: (module) => {
+                        return /(react|react*?|redux|mobx|umi|dva)/.test(module.context);
+                    },
+                    chunks: 'all',
+                    priority: 100,
+                    minChunks: 1,
+                    enforce: true,
+                },
+                antd: {
+                    test: (module) => {
+                        return /(antd|@ant-.*?)/.test(module.context);
+                    },
+                    name: "antd",
+                    chunks: "initial",
+                    priority: 90,
+                    minChunks: 1,
+                    enforce: true,
+                },
+                gmtcomponent: {
+                    test: (module) => {
+                        return /(\/pages\/components)/.test(module.context);
+                    },
+                    name: "gmtcomponent",
+                    chunks: 'all',
+                    priority: 80,
+                    minChunks: 1,
+                    enforce: true,
+                },
+                venders: {
+                    name: "venders",
+                    chunks: 'all',
+                    test: /[\\/]node_modules[\\/]/,
+                    minChunks: 2,
+                    priority: 70,
+                    enforce: true,
+                    reuseExistingChunk: true
+                }
+            }
+        },
+    },
+};
